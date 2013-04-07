@@ -1,0 +1,74 @@
+【t_user】
+◆テーブル作成
+
+create table t_user(user_id INT,user_name varchar(255) not null,user_pass varchar(255) not null,date datetime not null);
+
+◆プライマリー/ユニーク追加
+
+alter table t_user add primary key(user_id);
+alter table t_user add unique(user_name);
+
+プライマリ PRIMARY KEY()　データを識別する・重複なし(１フィールドしかない場合はNULL不許可)
+ユニーク UNIQUE()　　　　　重複なし（NULL可能）
+インデックス INDEX()　　　このキーのみを検索対象にする
+
+
+mysql> show fields from t_user;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| user_id   | int(11)      | NO   | PRI | 0       |       |
+| user_name | varchar(255) | NO   | UNI | NULL    |       |
+| user_pass | varchar(255) | NO   |     | NULL    |       |
+| date      | datetime     | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+
+※NULL不許可の追加
+alter table t_user modify name varchar(255) not null;
+
+◆データの追加
+insert into t_user values(1,'user1','123','2013-01-01 00:00:00');
+
+
+◆ユーザ locallineへアクセス許可
+grant all privileges on localline.* to localline@localhost identified by 'localline';
+
+mysql -u localline -p　//ユーザ名locallineでログイン
+use localline  //データベースlocallineを使用
+
+
+【t_msg】
+create table t_msg(msg_id INT,user_id INT not null,msg text not null,send_time datetime not null,del_time datetime not null,date datetime not null);
+alter table t_msg add primary key(msg_id);
+
+
+mysql> show fields from t_msg;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| msg_id    | int(11)  | NO   | PRI | 0       |       |
+| user_id   | int(11)  | NO   |     | NULL    |       |
+| msg       | text     | NO   |     | NULL    |       |
+| send_time | datetime | NO   |     | NULL    |       |
+| del_time  | datetime | NO   |     | NULL    |       |
+| date      | datetime | NO   |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+insert into t_msg values(1,1,'msg','2013-01-01 00:00:00','0','2013-01-01 00:00:00');
+
+【t_to】
+create table t_to(msg_id INT,user_id INT not null,read_time datetime not null,ok_time datetime not null,date datetime not null);
+alter table t_to add primary key(msg_id,user_id);
+
+
+mysql> show fields from t_to;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| msg_id    | int(11)  | YES  |     | NULL    |       |
+| user_id   | int(11)  | NO   |     | NULL    |       |
+| read_time | datetime | NO   |     | NULL    |       |
+| pk_time   | datetime | NO   |     | NULL    |       |
+| date      | datetime | NO   |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+
+insert into t_to values(1,1,'0','0','2013-01-01 00:00:00');
