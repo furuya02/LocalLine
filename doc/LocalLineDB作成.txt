@@ -64,10 +64,10 @@ mysql> show fields from t_to;
 +-----------+----------+------+-----+---------+-------+
 | Field     | Type     | Null | Key | Default | Extra |
 +-----------+----------+------+-----+---------+-------+
-| msg_id    | int(11)  | YES  |     | NULL    |       |
-| user_id   | int(11)  | NO   |     | NULL    |       |
+| msg_id    | int(11)  | NO   | PRI | 0       |       |
+| user_id   | int(11)  | NO   | PRI | NULL    |       |
 | read_time | datetime | NO   |     | NULL    |       |
-| pk_time   | datetime | NO   |     | NULL    |       |
+| ok_time   | datetime | NO   |     | NULL    |       |
 | date      | datetime | NO   |     | NULL    |       |
 +-----------+----------+------+-----+---------+-------+
 
