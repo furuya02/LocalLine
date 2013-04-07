@@ -1,0 +1,10 @@
+◆メッセージの送信
+http://localhost/localline/job.php?from_id=1&to_id=2,3&msg=msg&job_send
+◆既読
+http://localhost/localline/job.php?from_id=1&msg_id=1&job_read
+◆了解
+http://localhost/localline/job.php?from_id=1&msg_id=1&job_ok
+◆削除フラグ
+http://localhost/localline/job.php?from_id=1&msg_id=1&job_del
+◆削除フラグ取消
+http://localhost/localline/job.php?from_id=1&msg_id=1&job_undel
